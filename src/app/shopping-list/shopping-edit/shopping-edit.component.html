@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form [formGroup] = "shoppingListForm"
+        (ngSubmit)="onAdd()">
+            <div class="row">
+                <div class="col-sm-5 form-group">
+                    <label for="name">Name</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        class="form-control" 
+                        formControlName = "name" >
+                </div>
+                <div class="col-sm-2 form-group">
+                    <label for="amount">Amount</label>
+                    <input 
+                        type="number" 
+                        id="amount" 
+                        class="form-control" 
+                        formControlName ="amount" >
+                </div>
+                <span class="help-block" *ngIf="shoppingListForm.get('amount').invalid 
+                && shoppingListForm.get('amount').dirty">
+                    Amount must be greater than zero.
+                </span>
+            </div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <button
+                        [disabled] = "shoppingListForm.invalid"
+                        class="btn btn-success"
+                        type="submit">{{editMode ? 'Update' : 'Add'}}</button>
+                </div>
+                <div class="col-xs-1">
+                    <button class="btn btn-danger" 
+                     type="button"
+                     (click) = "onDelete()"
+                     *ngIf="editMode"
+                     >Delete</button>
+                </div>
+                <div class="col-xs-1">
+                    <button class="btn btn-primary" type="button" (click) = "onClear()">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
