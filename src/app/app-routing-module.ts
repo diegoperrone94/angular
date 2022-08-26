@@ -9,14 +9,17 @@ import { PageNotFoundComponent } from 'src/app/page-not-found/page-not-found.com
 import { HomeComponent } from './home/home.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesResolverService } from './recipes/recipes-resolver.service';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes : Routes = [
     { path : '', redirectTo: '/recipe', pathMatch:'full' },
-    { path : 'recipe', component : RecipesComponent, children : [
+    { path : 'recipe', canActivate : [AuthGuard],  component : RecipesComponent, children : [
         {path : 'new', component : RecipeEditComponent},
         {path : ':id/edit', component : RecipeEditComponent, resolve : [RecipesResolverService]}
     ] },
     { path : 'shopping-list', component : ShoppingListComponent},
+    { path : 'auth', component : AuthComponent},
     { path : 'not-found', component : PageNotFoundComponent } ,
     { path : '**', redirectTo : '/not-found' } 
 

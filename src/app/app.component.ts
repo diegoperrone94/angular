@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +8,10 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-
-  constructor(private slService : ShoppingListService){}
+  constructor(private authService : AuthService){ }
 
   ngOnInit(){
-/*     this.slService.changeView.subscribe(
-      (view :string) => {
-        this.loadedFeature = view;
-      } )*/
-    
+    this.authService.autoLogin();     
   }
 }
 
